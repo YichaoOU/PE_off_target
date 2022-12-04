@@ -1,0 +1,43 @@
+
+
+#BSUB -P crispresso
+#BSUB -o crispressoPooled_PE_yli11_2022-09-07/log_files/BaseE_%J_%I.out -e crispressoPooled_PE_yli11_2022-09-07/log_files/BaseE_%J_%I.err
+#BSUB -n 1
+#BSUB -q standard
+#BSUB -R "span[hosts=1] rusage[mem=12000]"
+#BSUB -J "BaseE[1-6]"
+
+
+
+module purge
+
+id=$LSB_JOBINDEX
+COL1=`head -n $id crispressoPooled_PE_yli11_2022-09-07.input|tail -n1|awk -F "	" '{print $1}'`
+COL2=`head -n $id crispressoPooled_PE_yli11_2022-09-07.input|tail -n1|awk -F "	" '{print $2}'`
+COL3=`head -n $id crispressoPooled_PE_yli11_2022-09-07.input|tail -n1|awk -F "	" '{print $3}'`
+COL4=`head -n $id crispressoPooled_PE_yli11_2022-09-07.input|tail -n1|awk -F "	" '{print $4}'`
+COL5=`head -n $id crispressoPooled_PE_yli11_2022-09-07.input|tail -n1|awk -F "	" '{print $5}'`
+COL6=`head -n $id crispressoPooled_PE_yli11_2022-09-07.input|tail -n1|awk -F "	" '{print $6}'`
+COL7=`head -n $id crispressoPooled_PE_yli11_2022-09-07.input|tail -n1|awk -F "	" '{print $7}'`
+COL8=`head -n $id crispressoPooled_PE_yli11_2022-09-07.input|tail -n1|awk -F "	" '{print $8}'`
+COL9=`head -n $id crispressoPooled_PE_yli11_2022-09-07.input|tail -n1|awk -F "	" '{print $9}'`
+LINE=`head -n $id crispressoPooled_PE_yli11_2022-09-07.input|tail -n1`
+
+echo ${COL1}
+echo ${COL2}
+echo ${COL3}
+echo ${COL4}
+echo ${COL5}
+echo ${COL6}
+
+ncore=1
+mem=12000
+q=standard
+PATH=/home/yli11/HemTools/bin:/hpcf/lsf/lsf_prod/10.1/linux3.10-glibc2.17-x86_64/etc:/hpcf/lsf/lsf_prod/10.1/linux3.10-glibc2.17-x86_64/bin:/usr/lpp/mmfs/bin:/usr/lpp/mmfs/lib:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/sbin:/cm/local/apps/environment-modules/3.2.10/bin:/opt/puppetlabs/bin
+export PATH=$PATH:"/home/yli11/HemTools/bin"
+module load conda3
+source activate /home/yli11/.conda/envs/cutadaptenv/
+module load samtools/1.7
+module load bowtie2/2.2.9
+CRISPRessoPooled -r1 ${COL1} --name ${COL2} -o crispressoPooled_PE_yli11_2022-09-07/${COL2}_results -f ${COL3} --quantification_window_size 1 --quantification_window_center -3 --base_editor_output --min_reads_to_use_region 3 --keep_intermediate --dump --limit_open_files_for_demux --plot_window_size 20
+

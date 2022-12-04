@@ -1,0 +1,90 @@
+a
+b
+c
+
+
+
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@noderome179>
+Subject: Job 168640930[1]: <email[1-1]> in cluster <hpcf_research_cluster> Done
+
+Job <email[1-1]> was submitted from host <noderome182> by user <yli11> in cluster <hpcf_research_cluster> at Wed Sep  7 14:12:57 2022
+Job was executed on host(s) <noderome179>, in queue <standard>, as user <yli11> in cluster <hpcf_research_cluster> at Wed Sep  7 15:35:09 2022
+</home/yli11> was used as the home directory.
+</home/yli11/Share/Kelcee> was used as the working directory.
+Started at Wed Sep  7 15:35:09 2022
+Terminated at Wed Sep  7 15:35:27 2022
+Results reported at Wed Sep  7 15:35:27 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+
+
+#BSUB -P crispresso
+#BSUB -o crispressoPooled_PE_yli11_2022-09-07/log_files/email_%J_%I.out -e crispressoPooled_PE_yli11_2022-09-07/log_files/email_%J_%I.err
+#BSUB -n 1
+#BSUB -q standard
+#BSUB -R "span[hosts=1] rusage[mem=2000]"
+#BSUB -J "email[1-1]"
+
+#BSUB -w "ended(168640929)"
+
+module purge
+
+id=$LSB_JOBINDEX
+COL1=`head -n $id /research/rgs01/home/clusterHome/yli11/HemTools/utils/../share/misc/sample.tsv|tail -n1|awk -F "	" '{print $1}'`
+COL2=`head -n $id /research/rgs01/home/clusterHome/yli11/HemTools/utils/../share/misc/sample.tsv|tail -n1|awk -F "	" '{print $2}'`
+COL3=`head -n $id /research/rgs01/home/clusterHome/yli11/HemTools/utils/../share/misc/sample.tsv|tail -n1|awk -F "	" '{print $3}'`
+COL4=`head -n $id /research/rgs01/home/clusterHome/yli11/HemTools/utils/../share/misc/sample.tsv|tail -n1|awk -F "	" '{print $4}'`
+COL5=`head -n $id /research/rgs01/home/clusterHome/yli11/HemTools/utils/../share/misc/sample.tsv|tail -n1|awk -F "	" '{print $5}'`
+COL6=`head -n $id /research/rgs01/home/clusterHome/yli11/HemTools/utils/../share/misc/sample.tsv|tail -n1|awk -F "	" '{print $6}'`
+COL7=`head -n $id /research/rgs01/home/clusterHome/yli11/HemTools/utils/../share/misc/sample.tsv|tail -n1|awk -F "	" '{print $7}'`
+COL8=`head -n $id /research/rgs01/home/clusterHome/yli11/HemTools/utils/../share/misc/sample.tsv|tail -n1|awk -F "	" '{print $8}'`
+COL9=`head -n $id /research/rgs01/home/clusterHome/yli11/HemTools/utils/../share/misc/sample.tsv|tail -n1|awk -F "	" '{print $9}'`
+LINE=`head -n $id /research/rgs01/home/clusterHome/yli11/HemTools/utils/../share/misc/sample.tsv|tail -n1`
+
+echo ${COL1}
+echo ${COL2}
+echo ${COL3}
+echo ${COL4}
+echo ${COL5}
+echo ${COL6}
+
+ncore=1
+mem=2000
+q=standard
+cd crispressoPooled_PE_yli11_2022-09-07
+PATH=/home/yli11/HemTools/bin:/hpcf/lsf/lsf_prod/10.1/linux3.10-glibc2.17-x86_64/etc:/hpcf/lsf/lsf_prod/10.1/linux3.10-glibc2.17-x86_64/bin:/usr/lpp/mmfs/bin:/usr/lpp/mmfs/lib:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/sbin:/cm/local/apps/environment-modules/3.2.10/bin:/opt/puppetlabs/bin
+export PATH=$PATH:"/home/yli11/HemTools/bin"
+module load python/2.7.13
+send_email_v1.py -m "crispressoPooled_PE_yli11_2022-09-07 is finished!" -j crispressoPooled_PE_yli11_2022-09-07
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   1.85 sec.
+    Max Memory :                                 76 MB
+    Average Memory :                             51.67 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1924.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                68
+    Run time :                                   18 sec.
+    Turnaround time :                            4950 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <crispressoPooled_PE_yli11_2022-09-07/log_files/email_168640930_1.err> for stderr output of this job.
+
